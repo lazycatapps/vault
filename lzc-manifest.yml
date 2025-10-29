@@ -1,0 +1,225 @@
+# app 的唯一 id,上架到商店需要保证不要冲突,尽量使用开发者自己的域名作为后缀.
+package: cloud.lazycat.app.liu.vault
+# app 的版本
+version: 1.21.0
+
+name: Vault
+keyword: vault, secrets, security, hashicorp
+description: HashiCorp Vault 密钥管理系统
+
+# 软件名称,会显示在启动器之类的地方
+locales:
+  zh:
+    name: Vault 密钥管理
+    description: |
+      ## HashiCorp Vault 密钥管理系统
+
+      **官方网站：** https://www.vaultproject.io/
+      **仓库地址：** https://github.com/lazycatapps/vault.git
+      **快速开始指南：** https://github.com/lazycatapps/vault/blob/main/QUICKSTART.md
+
+      HashiCorp Vault 是一个强大的密钥管理工具，用于安全地存储和访问密钥、密码、证书、API 密钥等敏感信息。Vault 提供了统一的接口来访问任何密钥，同时提供严格的访问控制和详细的审计日志。
+
+      本应用提供了完整的 Vault 服务器环境，支持 Web UI 和 API 访问，适用于开发和测试环境。
+
+      ## 访问地址
+
+      应用安装后，可通过以下地址访问：
+
+      `https://vault.{box-name}.heiyu.space`
+
+      ## 主要功能
+
+      - 🔐 安全存储敏感信息（密码、API 密钥、证书等）
+      - 📝 Key-Value 密钥引擎，支持版本控制
+      - 🔄 动态密钥生成（数据库、云服务等）
+      - 🔑 多种身份验证方法（Token、LDAP、GitHub 等）
+      - 📊 详细的审计日志记录
+      - 🌐 RESTful API 和命令行工具
+      - 🎨 直观的 Web 用户界面
+      - 🔒 数据加密和访问控制策略
+
+      ## 首次使用说明（重要）
+
+      **注意：Vault 在首次启动时需要进行初始化和解封操作，这是 Vault 安全机制的重要组成部分！**
+
+      ### 通过 Web UI 初始化（推荐）
+
+      1. 访问应用的 Web 界面
+      2. 点击 "Initialize" 按钮
+      3. 配置密钥分片数量和解封阈值
+      4. 点击 "Initialize" 完成初始化
+      5. **重要：立即下载或复制保存所有 Unseal Keys 和 Root Token！这些信息一旦丢失无法恢复！**
+      6. 使用所需数量的 Unseal Keys 依次解封 Vault
+      7. 使用 Root Token 登录系统
+
+      ## 使用方法
+
+      ### Web UI 操作
+
+      1. 使用 Root Token 或其他认证方式登录
+      2. 启用需要的密钥引擎（如 KV v2）
+      3. 创建和管理密钥
+      4. 配置访问策略和认证方法
+      5. 查看审计日志
+
+      ## 安全注意事项
+
+      - 🔑 **Unseal Keys 管理**：请将 Unseal Keys 分散保管在安全的地方，需要达到设定的阈值数量才能解封 Vault
+      - 🎫 **Root Token 保护**：Root Token 具有完全权限，请妥善保管并考虑使用其他认证方法替代日常使用
+      - 🔒 **生产环境配置**：当前配置禁用了 TLS，仅适用于开发测试。生产环境请务必启用 TLS 加密
+      - 💾 **数据备份**：定期备份 Vault 数据和配置，确保密钥不会丢失
+      - 📝 **审计日志**：建议启用审计日志功能，记录所有访问行为
+
+      ## 常见问题
+
+      ### Vault 处于 sealed 状态
+
+      Vault 每次重启后会自动进入 sealed（密封）状态，需要重新解封。请通过 Web UI 访问界面，输入所需数量的 Unseal Keys 进行解封。
+
+      ### 忘记 Root Token
+
+      如果忘记 Root Token，可以使用 Unseal Keys 生成新的 Root Token。具体操作请参考 Vault 官方文档。
+
+  en:
+    name: Vault
+    description: |
+      ## HashiCorp Vault Secrets Management System
+
+      **Official Website:** https://www.vaultproject.io/
+      **Repository:** https://github.com/lazycatapps/vault.git
+      **Quick Start Guide:** https://github.com/lazycatapps/vault/blob/main/QUICKSTART.md
+
+      HashiCorp Vault is a powerful secrets management tool for securely storing and accessing secrets, passwords, certificates, API keys, and other sensitive information. Vault provides a unified interface to access any secret while providing strict access control and detailed audit logs.
+
+      This application provides a complete Vault server environment, supporting Web UI and API access, suitable for development and testing environments.
+
+      ## Access URL
+
+      After installation, the application can be accessed via:
+
+      `https://vault.{box-name}.heiyu.space`
+
+      ## Main Features
+
+      - 🔐 Securely store sensitive information (passwords, API keys, certificates, etc.)
+      - 📝 Key-Value secrets engine with version control
+      - 🔄 Dynamic secrets generation (databases, cloud services, etc.)
+      - 🔑 Multiple authentication methods (Token, LDAP, GitHub, etc.)
+      - 📊 Detailed audit logging
+      - 🌐 RESTful API and command-line tools
+      - 🎨 Intuitive Web user interface
+      - 🔒 Data encryption and access control policies
+
+      ## First-time Usage Instructions (Important)
+
+      **Note: Vault requires initialization and unsealing operations on first startup. This is an important part of Vault's security mechanism!**
+
+      ### Initialize via Web UI (Recommended)
+
+      1. Access the application's Web interface
+      2. Click the "Initialize" button
+      3. Configure the number of key shares and unseal threshold
+      4. Click "Initialize" to complete initialization
+      5. **Important: Immediately download or copy all Unseal Keys and Root Token! This information cannot be recovered if lost!**
+      6. Use the required number of Unseal Keys to unseal Vault sequentially
+      7. Login to the system using the Root Token
+
+      ## Usage Instructions
+
+      ### Web UI Operations
+
+      1. Login using Root Token or other authentication methods
+      2. Enable required secrets engines (e.g., KV v2)
+      3. Create and manage secrets
+      4. Configure access policies and authentication methods
+      5. View audit logs
+
+      ## Security Considerations
+
+      - 🔑 **Unseal Keys Management**: Store Unseal Keys separately in secure locations. The configured threshold number of Keys is required to unseal Vault
+      - 🎫 **Root Token Protection**: Root Token has full privileges. Keep it secure and consider using other authentication methods for daily use
+      - 🔒 **Production Configuration**: Current configuration disables TLS and is only suitable for development and testing. Production environments must enable TLS encryption
+      - 💾 **Data Backup**: Regularly backup Vault data and configuration to ensure secrets are not lost
+      - 📝 **Audit Logs**: It's recommended to enable audit logging to record all access activities
+
+      ## Common Issues
+
+      ### Vault is in sealed state
+
+      Vault automatically enters sealed state after each restart and needs to be unsealed. Please access the Web UI and enter the required number of Unseal Keys to unseal.
+
+      ### Forgot Root Token
+
+      If you forget the Root Token, you can generate a new Root Token using Unseal Keys. Please refer to the official Vault documentation for specific instructions.
+
+# 软件本身的 license
+license: https://github.com/hashicorp/vault?tab=License-1-ov-file#readme
+
+# 软件的主页,会在商店等地方体现
+homepage: https://github.com/hashicorp/vault
+
+# lpk 的作者,会在商店等地方体现
+author: liu
+
+# application 作为一个特殊的 container 运行，对应的 service 名称为固定的`app`， 其他 service 可以通过此名称与 app 进行通讯
+application:
+  #是否存在后台任务， 若存在则系统不会对此 app 进行主动休眠等操作
+  background_task: true
+
+  # 期望的 app 域名，如果系统中已经有对应域名则会提示用户选择其他域名。 最终 app 分配到的域名以/lzcapp/run/app.subdomain 为准
+  subdomain: vault
+
+  routes:
+    - /=http://vault:8200
+
+  depends_on:
+    - vault
+
+  # 是否启用多实例
+  multi_instance: false
+
+services:
+  vault:
+    # lzc-cli appstore copy-image hashicorp/vault:latest
+    image: registry.lazycat.cloud/liu/hashicorp/vault:e39347ced948f85b
+    environment:
+      - |-
+        VAULT_LOCAL_CONFIG={
+          "storage": {
+            "file": {
+              "path": "/vault/file"
+            }
+          },
+          "listener": [
+            {
+              "tcp": {
+                "address": "0.0.0.0:8200",
+                "tls_disable": true
+              }
+            }
+          ],
+          "default_lease_ttl": "168h",
+          "max_lease_ttl": "720h",
+          "ui": true,
+          "disable_mlock": true
+        }
+
+    # IPC_LOCK capability is required for memory locking
+    # This prevents sensitive values from being swapped to disk
+    # Note: Currently disabled via disable_mlock for compatibility
+    cap_add:
+      - IPC_LOCK
+    command: server
+    binds:
+      - /lzcapp/var/file:/vault/file
+      - /lzcapp/var/logs:/vault/logs
+    health_check:
+      test:
+        - CMD-SHELL
+        - 'wget --spider --proxy=off http://127.0.0.1:8200'
+      start_period: 60s
+unsupported_platforms:
+  - ios
+  - android
+  - tvos
